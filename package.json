@@ -13,11 +13,26 @@
     "test": "jest",
     "benchmark": "ts-node ./benchmark/index.ts"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/keriati/bucket-priority-queue.git"
+  },
   "keywords": [
     "bucket",
-    "queue"
+    "queue",
+    "priority",
+    "priority-queue",
+    "data-structure",
+    "data-structures"
   ],
-  "author": "Attila Kerekes",
+  "author": {
+    "name": "Attila Kerekes",
+    "email": "ak@enrg8.com"
+  },
+  "bugs": {
+    "url": "https://github.com/keriati/bucket-priority-queue/issues"
+  },
+  "homepage": "https://github.com/keriati/bucket-priority-queue",
   "license": "MIT",
   "devDependencies": {
     "@types/benchmark": "^2.1.5",

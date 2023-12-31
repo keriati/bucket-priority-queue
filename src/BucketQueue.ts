@@ -2,7 +2,7 @@ export type Integer = number;
 export type Priority = Integer;
 
 export class BucketQueue<T> {
-  buckets: Map<number, T[]> = new Map();
+  private buckets: T[][] = [];
 
   private priorityMax = 0;
 
@@ -18,10 +18,10 @@ export class BucketQueue<T> {
   }
 
   push(item: T, priority: Priority): void {
-    if (!this.buckets.has(priority)) {
-      this.buckets.set(priority, []);
+    if (!this.buckets[priority]) {
+      this.buckets[priority] = [];
     }
-    this.buckets.get(priority)!.push(item);
+    this.buckets[priority].push(item);
     if (this._size === 0) {
       this.priorityMin = priority;
       this.priorityMax = priority;
@@ -32,32 +32,34 @@ export class BucketQueue<T> {
     this._size++;
   }
 
-  popHighest(): T | undefined {
+  private pop(position: 'priorityMin' | 'priorityMax'): T | undefined {
     if (!this._size) return undefined;
-    const bucket = this.buckets.get(this.priorityMax);
+    const bucket = this.buckets[this[position]];
     const item = bucket!.pop();
     if (!bucket!.length) {
-      this.buckets.delete(this.priorityMax);
-      const bucketKeys = Array.from(this.buckets.keys());
-      this.priorityMax = Math.max(...bucketKeys);
-      this.priorityMin = Math.min(...bucketKeys);
+      for (let i = 0; i < this.buckets.length; i++) {
+        if (this.buckets[i]?.length > 0) {
+          this.priorityMin = i;
+          break;
+        }
+      }
+      for (let i = this.buckets.length - 1; i >= 0; i--) {
+        if (this.buckets[i]?.length > 0) {
+          this.priorityMax = i;
+          break;
+        }
+      }
     }
     this._size--;
     return item;
   }
 
+  popHighest(): T | undefined {
+    return this.pop('priorityMax');
+  }
+
   popLowest(): T | undefined {
-    if (!this._size) return undefined;
-    const bucket = this.buckets.get(this.priorityMin);
-    const item = bucket!.pop();
-    if (!bucket!.length) {
-      this.buckets.delete(this.priorityMin);
-      const bucketKeys = Array.from(this.buckets.keys());
-      this.priorityMax = Math.max(...bucketKeys);
-      this.priorityMin = Math.min(...bucketKeys);
-    }
-    this._size--;
-    return item;
+    return this.pop('priorityMin');
   }
 
   get size(): Integer {

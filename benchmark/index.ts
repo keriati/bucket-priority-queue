@@ -4,10 +4,7 @@ import Heap from "heap-js";
 
 const suit = new Benchmark.Suite();
 
-const bq = new BucketQueue<string>();
-const heap = new Heap<[string, number]>((a, b) => a[1] - b[1]);
-
-const rounds = 100_000;
+const rounds = 10_000;
 const priorityMax = 100;
 
 const items: [string, number][] = [];
@@ -17,6 +14,7 @@ for (let i = 0; i < rounds; i++) {
 }
 
 suit.add('BucketQueue#popLowest()', () => {
+  const bq = new BucketQueue<string>();
   for (let i = 0; i < items.length; i++) {
     bq.push(items[i][0], items[i][1]);
   }
@@ -24,6 +22,7 @@ suit.add('BucketQueue#popLowest()', () => {
     bq.popLowest();
   }
 }).add('BucketQueue#popHighest()', () => {
+  const bq = new BucketQueue<string>();
   for (let i = 0; i < items.length; i++) {
     bq.push(items[i][0], items[i][1]);
   }
@@ -31,6 +30,7 @@ suit.add('BucketQueue#popLowest()', () => {
     bq.popHighest();
   }
 }).add('Heap#pop()', () => {
+  const heap = new Heap<[string, number]>((a, b) => a[1] - b[1]);
   for (let i = 0; i < items.length; i++) {
     heap.push(items[i]);
   }
@@ -39,4 +39,7 @@ suit.add('BucketQueue#popLowest()', () => {
   }
 }).on('cycle', function (e: Event) {
   console.log('' + e.target);
+}).on('complete', function() {
+  // @ts-ignore
+  console.log('Fastest is ' + this.filter('fastest').map('name'));
 }).run();

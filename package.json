@@ -1,6 +1,6 @@
 {
   "name": "bucket-priority-queue",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Implementation of the bucket queue data structure in TypeScript",
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",

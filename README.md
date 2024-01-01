@@ -5,6 +5,7 @@
 `BucketQueue` is a priority queue implementation ideal for algorithms requiring efficient, priority-based item
 management, such as Dijkstra's algorithm. It's designed to offer quick enqueue and dequeue operations, particularly
 when the priority key space is small and comprised of positive integers, a common scenario in many programming puzzles.
+See [Bucket queue on Wikipedia](https://en.wikipedia.org/wiki/Bucket_queue) for more.
 
 ## Installation
 

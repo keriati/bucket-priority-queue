@@ -1,7 +1,7 @@
 // src/BucketQueue.ts
 var BucketQueue = class {
   constructor(items = []) {
-    this.buckets = [];
+    this.buckets = new Array(100);
     this.priorityMax = 0;
     this.priorityMin = 0;
     this._size = 0;
@@ -12,7 +12,7 @@ var BucketQueue = class {
   }
   push(item, priority) {
     if (!this.buckets[priority]) {
-      this.buckets[priority] = [];
+      this.buckets[priority] = new Array(1e3);
     }
     this.buckets[priority].push(item);
     if (this._size === 0) {

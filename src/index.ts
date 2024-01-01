@@ -1,1 +1,1 @@
-export {BucketQueue} from './BucketQueue';
+export { BucketQueue } from "./BucketQueue";

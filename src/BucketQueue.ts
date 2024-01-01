@@ -32,11 +32,11 @@ export class BucketQueue<T> {
     this._size++;
   }
 
-  private pop(position: 'priorityMin' | 'priorityMax'): T | undefined {
+  private pop(position: "priorityMin" | "priorityMax"): T | undefined {
     if (!this._size) return undefined;
     const bucket = this.buckets[this[position]];
     const item = bucket!.pop();
-    if (!bucket!.length) {
+    if (bucket.length === 0) {
       for (let i = 0; i < this.buckets.length; i++) {
         if (this.buckets[i]?.length > 0) {
           this.priorityMin = i;
@@ -55,11 +55,11 @@ export class BucketQueue<T> {
   }
 
   popHighest(): T | undefined {
-    return this.pop('priorityMax');
+    return this.pop("priorityMax");
   }
 
   popLowest(): T | undefined {
-    return this.pop('priorityMin');
+    return this.pop("priorityMin");
   }
 
   get size(): Integer {

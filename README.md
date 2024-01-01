@@ -3,7 +3,7 @@
 ## Overview
 
 `BucketQueue` is a priority queue implementation ideal for algorithms requiring efficient, priority-based item
-management, such as Dijkstra's algorithm. It's designed to offer quick enqueue and dequeue operations, particularly 
+management, such as Dijkstra's algorithm. It's designed to offer quick enqueue and dequeue operations, particularly
 when the priority key space is small and comprised of positive integers, a common scenario in many programming puzzles.
 
 ## Installation
@@ -19,10 +19,14 @@ npm install bucket-priority-queue
 Here's how you can integrate BucketQueue into your project:
 
 ```typescript
-import { BucketQueue } from 'bucket-priority-queue';
+import { BucketQueue } from "bucket-priority-queue";
 
 // Initialize the queue with optional initial items
-const queue = new BucketQueue<number>([[1, 1], [2, 2], [3, 3]]);
+const queue = new BucketQueue<number>([
+  [1, 1],
+  [2, 2],
+  [3, 3],
+]);
 
 // Adding items with priority
 queue.push(5, 1); // item 5 with priority 1

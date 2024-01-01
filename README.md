@@ -1,5 +1,6 @@
 # Bucket Queue in TypeScript
-
+[![codecov](https://codecov.io/gh/keriati/bucket-priority-queue/graph/badge.svg?token=UYXBHXOSOV)](https://codecov.io/gh/keriati/bucket-priority-queue)
+![Test Status](https://github.com/keriati/bucket-priority-queue/actions/workflows/coverage.yml/badge.svg)
 ## Overview
 
 `BucketQueue` is a priority queue implementation ideal for algorithms requiring efficient, priority-based item

@@ -11,7 +11,8 @@
   "scripts": {
     "build": "tsup",
     "test": "jest",
-    "bench": "ts-node ./benchmark/popPush.ts",
+    "bench": "ts-node ./benchmark/popPush3.ts",
+    "bench1000": "ts-node ./benchmark/popPush1000.ts",
     "lint": "eslint --ext .js,.ts",
     "format": "prettier --write ."
   },

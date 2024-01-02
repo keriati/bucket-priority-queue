@@ -7,8 +7,22 @@
 
 `BucketQueue` is a priority queue implementation ideal for algorithms requiring efficient, priority-based item
 management, such as Dijkstra's algorithm. It's designed to offer quick enqueue and dequeue operations, particularly
-when the priority key space is small and comprised of positive integers, a common scenario in many programming puzzles.
+when the **priority key space is small and comprised of positive integers**, a common scenario in many programming puzzles.
 See [Bucket queue on Wikipedia](https://en.wikipedia.org/wiki/Bucket_queue) for more.
+
+## Benchmarks
+
+Compared to other Heap-based priority queue implementations, `BucketQueue` can offer a significant performance boost
+given the right conditions. The following benchmarks were run on a 2021 MacBook Pro with Apple M1 Max chip, Node.js 20.10.0
+
+    BucketQueue x 49,750,443 ops/sec ±0.14% (101 runs sampled)
+    HeapJS x 12,203,990 ops/sec ±0.18% (99 runs sampled)
+    HeapDS x 1,094,289 ops/sec ±0.09% (97 runs sampled)
+    Heap x 4,401,016 ops/sec ±0.10% (98 runs sampled)
+    MinPriorityQueue x 25,171,646 ops/sec ±0.09% (95 runs sampled)
+    PriorityQueue x 15,892,132 ops/sec ±0.07% (96 runs sampled)
+
+For more details, see the [benchmark source code](https://github.com/keriati/bucket-priority-queue/tree/main/benchmark).
 
 ## Installation
 
@@ -52,3 +66,7 @@ const lowest = queue.popLowest(); // returns item with lowest priority
 **popLowest(): T | undefined** - Removes and returns the item with the lowest priority.
 
 **size: number** - Returns the current size of the queue.
+
+## License
+
+This project is licensed under the MIT License - see the LICENSE file for details.

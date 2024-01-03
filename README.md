@@ -13,7 +13,8 @@ See [Bucket queue on Wikipedia](https://en.wikipedia.org/wiki/Bucket_queue) for 
 ## Benchmarks
 
 Compared to other Heap-based priority queue implementations, `BucketQueue` can offer a significant performance boost
-given the right conditions. The following benchmarks were run on a 2021 MacBook Pro with Apple M1 Max chip, Node.js 20.10.0
+given the right conditions. The following benchmarks - about pop and push operations - were run on a 2021 MacBook Pro
+with Apple M1 Max chip, Node.js 20.10.0:
 
     BucketQueue x 49,750,443 ops/sec ±0.14% (101 runs sampled)
     HeapJS x 12,203,990 ops/sec ±0.18% (99 runs sampled)
@@ -37,10 +38,10 @@ npm install bucket-priority-queue
 Here's how you can integrate BucketQueue into your project:
 
 ```typescript
-import { BucketQueue } from "bucket-priority-queue";
+import { MinBucketQueue, MaxBucketQueue } from "bucket-priority-queue";
 
 // Initialize the queue with optional initial items
-const queue = new BucketQueue<number>([
+const queue = new MinBucketQueue<number>([
   [1, 1],
   [2, 2],
   [3, 3],
@@ -51,21 +52,48 @@ queue.push(5, 1); // item 5 with priority 1
 queue.push(6, 2); // item 6 with priority 2
 
 // Retrieve items with the highest or lowest priority
-const highest = queue.popHighest(); // returns item with highest priority
-const lowest = queue.popLowest(); // returns item with lowest priority
+const lowest = queue.pop(); // returns item with lowest priority
 ```
 
 ## API Reference
 
-**constructor(items?: [T, Priority][]): void** - Initializes the queue, optionally with an array of items and their priorities.
+### MinBucketQueue<T>
 
-**push(item: T, priority: Priority): void** - Adds an item with an associated priority to the queue.
+`MinBucketQueue` is a data structure that operates similarly to a priority queue. It organizes elements in a way such that the element with the minimum priority is always at the front.
 
-**popHighest(): T | undefined** - Removes and returns the item with the highest priority.
+#### Methods
 
-**popLowest(): T | undefined** - Removes and returns the item with the lowest priority.
+- **constructor(items?: [T, Priority][]):** Initialize a new MinBucketQueue with optional initial items.
+- **push(item: T, priority: Priority):** Adds an item to the queue with an associated priority.
+- **pop(): T | undefined:** Removes and returns the item with the minimum priority. Returns undefined if the queue is empty.
+- **add(item: T, priority: Priority):** Alias for push.
+- **poll(): T | undefined:** Alias for pop.
+- **peek(): T | undefined:** Returns the item with the minimum priority without removing it from the queue.
+- **clear():** Removes all items from the queue.
+- **refill(items: [T, Priority][]):** Clears the queue and adds the provided items.
+- **has(item: T):** Checks if the queue contains the specified item.
+- **contains(item: T):** Alias for has.
+- **toArray(): T[]:** Returns an array containing all the items in the queue.
+- **get size(): number:** Returns the number of items in the queue.
 
-**size: number** - Returns the current size of the queue.
+### MaxBucketQueue<T>
+
+`MaxBucketQueue` is a data structure that operates similarly to a priority queue. It organizes elements in a way such that the element with the maximum priority is always at the front.
+
+#### Methods
+
+- **constructor(items?: [T, Priority][]):** Initialize a new MaxBucketQueue with optional initial items.
+- **push(item: T, priority: Priority):** Adds an item to the queue with an associated priority.
+- **pop(): T | undefined:** Removes and returns the item with the maximum priority. Returns undefined if the queue is empty.
+- **add(item: T, priority: Priority):** Alias for push.
+- **poll(): T | undefined:** Alias for pop.
+- **peek(): T | undefined:** Returns the item with the maximum priority without removing it from the queue.
+- **clear():** Removes all items from the queue.
+- **refill(items: [T, Priority][]):** Clears the queue and adds the provided items.
+- **has(item: T):** Checks if the queue contains the specified item.
+- **contains(item: T):** Alias for has.
+- **toArray(): T[]:** Returns an array containing all the items in the queue.
+- **get size(): number:** Returns the number of items in the queue.
 
 ## License
 

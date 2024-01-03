@@ -7,13 +7,15 @@ import { PriorityQueue, MinPriorityQueue } from "priority-queue-typed";
 
 const suit = new Benchmark.Suite();
 
-const itemNumber = 10_000_000;
+const itemNumber = 1_000_000;
 const priorityMax = 1000;
 
 const items: number[] = [];
+const itemsPrio: [number, number][] = [];
 
 for (let i = 0; i < itemNumber; i++) {
   items.push(i % priorityMax);
+  itemsPrio.push([i % priorityMax, i % priorityMax]);
 }
 
 const bq = new MinBucketQueue<number>();
@@ -34,58 +36,34 @@ for (let i = 0; i < items.length; i++) {
 
 suit
   .add("MinBucketQueue", () => {
-    const i1 = bq.pop() as number;
-    const i2 = bq.pop() as number;
-    const i3 = bq.pop() as number;
-
-    bq.push(i3, i3);
-    bq.push(i2, i2);
-    bq.push(i1, i1);
+    bq.clear();
+    for (let i = 0; i < items.length; i++) {
+      bq.push(items[i], items[i]);
+    }
   })
   .add("HeapJS", () => {
-    const i1 = heapjs.pop() as number;
-    const i2 = heapjs.pop() as number;
-    const i3 = heapjs.pop() as number;
-
-    heapjs.push(i3);
-    heapjs.push(i2);
-    heapjs.push(i1);
+    heapjs.clear();
+    for (let i = 0; i < items.length; i++) {
+      heapjs.push(items[i]);
+    }
   })
   .add("HeapDS", () => {
-    const i1 = heapds.pop() as number;
-    const i2 = heapds.pop() as number;
-    const i3 = heapds.pop() as number;
-
-    heapds.push(i3);
-    heapds.push(i2);
-    heapds.push(i1);
+    heapds.clear();
+    for (let i = 0; i < items.length; i++) {
+      heapds.push(items[i]);
+    }
   })
   .add("Heap", () => {
-    const i1 = heap.pop() as number;
-    const i2 = heap.pop() as number;
-    const i3 = heap.pop() as number;
-
-    heap.push(i3);
-    heap.push(i2);
-    heap.push(i1);
+    heap.clear();
+    for (let i = 0; i < items.length; i++) {
+      heap.push(items[i]);
+    }
   })
   .add("MinPriorityQueue", () => {
-    const i1 = mpq.poll() as number;
-    const i2 = mpq.poll() as number;
-    const i3 = mpq.poll() as number;
-
-    mpq.add(i3);
-    mpq.add(i2);
-    mpq.add(i1);
+    mpq.refill(items);
   })
   .add("PriorityQueue", () => {
-    const i1 = pq.poll() as number;
-    const i2 = pq.poll() as number;
-    const i3 = pq.poll() as number;
-
-    pq.add(i3);
-    pq.add(i2);
-    pq.add(i1);
+    pq.refill(items);
   })
   .on("cycle", function (e: Event) {
     console.log("" + e.target);

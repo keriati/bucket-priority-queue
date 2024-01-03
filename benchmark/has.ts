@@ -7,7 +7,7 @@ import { PriorityQueue, MinPriorityQueue } from "priority-queue-typed";
 
 const suit = new Benchmark.Suite();
 
-const itemNumber = 10_000_000;
+const itemNumber = 1_000_000;
 const priorityMax = 1000;
 
 const items: number[] = [];
@@ -34,58 +34,29 @@ for (let i = 0; i < items.length; i++) {
 
 suit
   .add("MinBucketQueue", () => {
-    const i1 = bq.pop() as number;
-    const i2 = bq.pop() as number;
-    const i3 = bq.pop() as number;
-
-    bq.push(i3, i3);
-    bq.push(i2, i2);
-    bq.push(i1, i1);
+    for (let i = 0; i < 1000; i++) {
+      bq.has(i);
+    }
   })
   .add("HeapJS", () => {
-    const i1 = heapjs.pop() as number;
-    const i2 = heapjs.pop() as number;
-    const i3 = heapjs.pop() as number;
-
-    heapjs.push(i3);
-    heapjs.push(i2);
-    heapjs.push(i1);
-  })
-  .add("HeapDS", () => {
-    const i1 = heapds.pop() as number;
-    const i2 = heapds.pop() as number;
-    const i3 = heapds.pop() as number;
-
-    heapds.push(i3);
-    heapds.push(i2);
-    heapds.push(i1);
+    for (let i = 0; i < 1000; i++) {
+      heapjs.contains(i);
+    }
   })
   .add("Heap", () => {
-    const i1 = heap.pop() as number;
-    const i2 = heap.pop() as number;
-    const i3 = heap.pop() as number;
-
-    heap.push(i3);
-    heap.push(i2);
-    heap.push(i1);
+    for (let i = 0; i < 1000; i++) {
+      heap.contains(i);
+    }
   })
   .add("MinPriorityQueue", () => {
-    const i1 = mpq.poll() as number;
-    const i2 = mpq.poll() as number;
-    const i3 = mpq.poll() as number;
-
-    mpq.add(i3);
-    mpq.add(i2);
-    mpq.add(i1);
+    for (let i = 0; i < 1000; i++) {
+      mpq.has(i);
+    }
   })
   .add("PriorityQueue", () => {
-    const i1 = pq.poll() as number;
-    const i2 = pq.poll() as number;
-    const i3 = pq.poll() as number;
-
-    pq.add(i3);
-    pq.add(i2);
-    pq.add(i1);
+    for (let i = 0; i < 1000; i++) {
+      pq.has(i);
+    }
   })
   .on("cycle", function (e: Event) {
     console.log("" + e.target);

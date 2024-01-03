@@ -1,16 +1,32 @@
 type Integer = number;
 type Priority = Integer;
-declare class BucketQueue<T> {
-    private buckets;
-    private priorityMax;
-    private priorityMin;
-    private _size;
+
+declare abstract class BucketQueue<T> {
+    protected buckets: T[][];
+    protected pointer: number;
+    protected _size: number;
     constructor(items?: [T, Priority][]);
-    push(item: T, priority: Priority): void;
-    private pop;
-    popHighest(): T | undefined;
-    popLowest(): T | undefined;
-    get size(): Integer;
+    abstract push(item: T, priority: Priority): void;
+    abstract pop(): T | undefined;
+    add(item: T, priority: Priority): void;
+    poll(): T | undefined;
+    peek(): T | undefined;
+    clear(): void;
+    refill(items: [T, Priority][]): void;
+    has(item: T): boolean;
+    contains: (item: T) => boolean;
+    toArray(): T[];
+    get size(): number;
 }
 
-export { BucketQueue };
+declare class MaxBucketQueue<T> extends BucketQueue<T> {
+    push(item: T, priority: Priority): void;
+    pop(): T | undefined;
+}
+
+declare class MinBucketQueue<T> extends BucketQueue<T> {
+    push(item: T, priority: Priority): void;
+    pop(): T | undefined;
+}
+
+export { type Integer, MaxBucketQueue, MinBucketQueue, type Priority };

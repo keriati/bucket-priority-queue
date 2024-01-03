@@ -1,5 +1,5 @@
 import Benchmark from "benchmark";
-import { BucketQueue } from "../src";
+import { MinBucketQueue } from "../src";
 import HeapJS from "heap-js";
 import Heap from "heap";
 import { MinHeap as HeapDS } from "@datastructures-js/heap";
@@ -16,7 +16,7 @@ for (let i = 0; i < itemNumber; i++) {
   items.push(i % priorityMax);
 }
 
-const bq = new BucketQueue<number>();
+const bq = new MinBucketQueue<number>();
 const heapjs = new HeapJS<number>((a, b) => a - b);
 const heap = new Heap<number>((a, b) => a - b);
 const heapds = new HeapDS<number>();
@@ -33,10 +33,10 @@ for (let i = 0; i < items.length; i++) {
 }
 
 suit
-  .add("BucketQueue", () => {
+  .add("MinBucketQueue", () => {
     const items: number[] = [];
     for (let i = 0; i < 1000; i++) {
-      items.push(bq.popLowest() as number);
+      items.push(bq.pop() as number);
     }
     for (let i = 999; i >= 0; i--) {
       bq.push(items[i], items[i]);

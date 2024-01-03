@@ -13,12 +13,14 @@ describe("BucketQueue", () => {
       bq.push(item2, priority2);
 
       expect(bq.size).toBe(2);
+      expect(bq.length).toBe(2);
     });
 
     it("returns 0 if there are no items", () => {
       const bq = new MinBucketQueue();
 
       expect(bq.size).toBe(0);
+      expect(bq.length).toBe(0);
     });
 
     it("returns 0 when all items are removed", () => {
@@ -35,6 +37,7 @@ describe("BucketQueue", () => {
       }
 
       expect(bq.size).toBe(0);
+      expect(bq.length).toBe(0);
     });
   });
 
@@ -92,6 +95,7 @@ describe("BucketQueue", () => {
       const bq = new MinBucketQueue(items);
 
       expect(bq.has("item2")).toBe(true);
+      expect(bq.contains("item2")).toBe(true);
     });
 
     it("returns false if the item is not in the queue", () => {
@@ -104,20 +108,7 @@ describe("BucketQueue", () => {
       const bq = new MinBucketQueue(items);
 
       expect(bq.has("item5")).toBe(false);
-    });
-  });
-
-  describe("#contains()", () => {
-    it("returns true if the item is in the queue", () => {
-      const items: [string, number][] = [
-        ["item1", 0],
-        ["item2", 1],
-        ["item3", 2],
-        ["item4", 3],
-      ];
-      const bq = new MinBucketQueue(items);
-
-      expect(bq.contains("item2")).toBe(true);
+      expect(bq.contains("item5")).toBe(false);
     });
   });
 
@@ -132,6 +123,20 @@ describe("BucketQueue", () => {
       const bq = new MinBucketQueue(items);
 
       expect(bq.toArray()).toEqual(["item1", "item2", "item3", "item4"]);
+    });
+  });
+
+  describe("#isEmpty()", () => {
+    it("returns true if the queue is empty", () => {
+      const bq = new MinBucketQueue();
+
+      expect(bq.isEmpty()).toBe(true);
+    });
+
+    it("returns false if the queue is not empty", () => {
+      const bq = new MinBucketQueue([["item", 0]]);
+
+      expect(bq.isEmpty()).toBe(false);
     });
   });
 });

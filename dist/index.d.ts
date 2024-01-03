@@ -9,6 +9,7 @@ declare abstract class BucketQueue<T> {
     abstract push(item: T, priority: Priority): void;
     abstract pop(): T | undefined;
     add(item: T, priority: Priority): void;
+    offer(item: T, priority: Priority): void;
     poll(): T | undefined;
     peek(): T | undefined;
     clear(): void;
@@ -16,7 +17,9 @@ declare abstract class BucketQueue<T> {
     has(item: T): boolean;
     contains: (item: T) => boolean;
     toArray(): T[];
+    isEmpty: () => boolean;
     get size(): number;
+    get length(): number;
 }
 
 declare class MaxBucketQueue<T> extends BucketQueue<T> {

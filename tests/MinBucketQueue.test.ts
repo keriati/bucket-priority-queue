@@ -58,6 +58,18 @@ describe("MinBucketQueue", () => {
     });
   });
 
+  describe("#offer()", () => {
+    it("adds an item with priority", () => {
+      const bq = new MinBucketQueue();
+      const item = "item";
+      const priority = 0;
+
+      bq.offer(item, priority);
+
+      expect(bq.poll()).toBe(item);
+    });
+  });
+
   describe("#pop()", () => {
     it("returns the lowest priority item", () => {
       const bq = new MinBucketQueue();

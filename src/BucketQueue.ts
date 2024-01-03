@@ -21,6 +21,10 @@ export abstract class BucketQueue<T> {
     this.push(item, priority);
   }
 
+  offer(item: T, priority: Priority): void {
+    this.push(item, priority);
+  }
+
   poll(): T | undefined {
     return this.pop();
   }
@@ -63,7 +67,13 @@ export abstract class BucketQueue<T> {
     return array;
   }
 
+  isEmpty = (): boolean => this._size === 0;
+
   get size(): number {
+    return this._size;
+  }
+
+  get length(): number {
     return this._size;
   }
 }

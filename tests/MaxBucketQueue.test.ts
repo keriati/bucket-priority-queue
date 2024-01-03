@@ -58,6 +58,18 @@ describe("MaxBucketQueue", () => {
     });
   });
 
+  describe("#offer()", () => {
+    it("adds an item with priority", () => {
+      const bq = new MaxBucketQueue();
+      const item = "item";
+      const priority = 0;
+
+      bq.offer(item, priority);
+
+      expect(bq.poll()).toBe(item);
+    });
+  });
+
   describe("#pop()", () => {
     it("returns the highest priority item", () => {
       const bq = new MaxBucketQueue();

@@ -65,8 +65,9 @@ const lowest = queue.pop(); // returns item with lowest priority
 
 - **constructor(items?: [T, Priority][]):** Initialize a new MinBucketQueue with optional initial items.
 - **push(item: T, priority: Priority):** Adds an item to the queue with an associated priority.
-- **pop(): T | undefined:** Removes and returns the item with the minimum priority. Returns undefined if the queue is empty.
 - **add(item: T, priority: Priority):** Alias for push.
+- **offer(item: T, priority: Priority):** Alias for push.
+- **pop(): T | undefined:** Removes and returns the item with the minimum priority. Returns undefined if the queue is empty.
 - **poll(): T | undefined:** Alias for pop.
 - **peek(): T | undefined:** Returns the item with the minimum priority without removing it from the queue.
 - **clear():** Removes all items from the queue.
@@ -74,7 +75,9 @@ const lowest = queue.pop(); // returns item with lowest priority
 - **has(item: T):** Checks if the queue contains the specified item.
 - **contains(item: T):** Alias for has.
 - **toArray(): T[]:** Returns an array containing all the items in the queue.
-- **get size(): number:** Returns the number of items in the queue.
+- **isEmpty(): boolean:** Returns `true` if the queue is empty, otherwise returns `false`.
+- **size: number:** Contains the number of items in the queue.
+- **length: number:** Contains the number of items in the queue.
 
 ### MaxBucketQueue<T>
 
@@ -84,8 +87,9 @@ const lowest = queue.pop(); // returns item with lowest priority
 
 - **constructor(items?: [T, Priority][]):** Initialize a new MaxBucketQueue with optional initial items.
 - **push(item: T, priority: Priority):** Adds an item to the queue with an associated priority.
-- **pop(): T | undefined:** Removes and returns the item with the maximum priority. Returns undefined if the queue is empty.
 - **add(item: T, priority: Priority):** Alias for push.
+- **offer(item: T, priority: Priority):** Alias for push.
+- **pop(): T | undefined:** Removes and returns the item with the maximum priority. Returns undefined if the queue is empty.
 - **poll(): T | undefined:** Alias for pop.
 - **peek(): T | undefined:** Returns the item with the maximum priority without removing it from the queue.
 - **clear():** Removes all items from the queue.
@@ -93,7 +97,9 @@ const lowest = queue.pop(); // returns item with lowest priority
 - **has(item: T):** Checks if the queue contains the specified item.
 - **contains(item: T):** Alias for has.
 - **toArray(): T[]:** Returns an array containing all the items in the queue.
-- **get size(): number:** Returns the number of items in the queue.
+- **isEmpty(): boolean:** Returns `true` if the queue is empty, otherwise returns `false`.
+- **size: number:** Contains the number of items in the queue.
+- **length: number:** Contains the number of items in the queue.
 
 ## License
 
